@@ -4,7 +4,7 @@ import { Timestamp } from 'firebase-admin/firestore';
 
 export async function GET(req: Request) {
   if (!db) {
-    return NextResponse.json({ error: 'Firebase is not initialized.' }, { status: 500 });
+    return NextResponse.json({ error: 'Firebase is not initialized. Check the server logs for more details.' }, { status: 500 });
   }
 
   try {
