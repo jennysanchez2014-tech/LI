@@ -99,17 +99,6 @@ export function LicenseList() {
         }
     }
 
-    // Auto-fetch licenses if key is present
-    useEffect(() => {
-        if(adminKey) {
-            handleFetchLicenses();
-        } else {
-            setLicenses([]);
-            setHasSearched(false);
-            setError(null);
-        }
-    }, [adminKey]);
-
     return (
         <Card className="shadow-lg col-span-1 lg:col-span-2">
             <CardHeader>

@@ -22,10 +22,16 @@ export async function GET(req: Request) {
     const licensesSnapshot = await db.collection('licenses').get();
     const licenses = licensesSnapshot.docs.map(doc => {
       const data = doc.data();
+      
+      let expirationDate = new Date(0).toISOString(); // Default to epoch time if invalid
+      if (data.expiration_date && data.expiration_date instanceof Timestamp) {
+        expirationDate = data.expiration_date.toDate().toISOString();
+      }
+
       return {
         id: doc.id,
-        status: data.status,
-        expiration_date: (data.expiration_date as Timestamp).toDate().toISOString(),
+        status: data.status || 'UNKNOWN',
+        expiration_date: expirationDate,
       };
     });
 
